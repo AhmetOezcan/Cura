@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Der edle Kocher – Dein Einkaufscoach</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header>
+    <h1>Der edle Kocher <span aria-hidden="true">🧑‍🍳✨</span></h1>
+    <p class="subtitle">„Die Dosis macht’s aus.“ – freundlich, motivierend, ohne Verbote</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="eingabe">
+      <h2 id="eingabe">Einkäufe hinzufügen</h2>
+      <form id="add-form">
+        <label for="item">Produktname</label>
+        <input id="item" name="item" type="text" placeholder="z. B. Joghurt" required />
+        <label for="qty">Menge</label>
+        <input id="qty" name="qty" type="number" min="1" value="1" required />
+        <button type="submit">Hinzufügen</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="liste">
+      <h2 id="liste">Dein Warenkorb (Demo)</h2>
+      <ul id="cart-list" aria-live="polite"></ul>
+      <button id="clear">Zurücksetzen</button>
+    </section>
+
+    <section aria-labelledby="coach">
+      <h2 id="coach">Der edle Kocher spricht</h2>
+      <div id="coach-bubble" role="status" aria-live="polite">
+        Willkommen! Füge ein paar Produkte hinzu, ich gebe dir dann einen Tipp. 😄
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Prototyp (MVP). Keine medizinischen Empfehlungen. Datenschutz by Design.</small>
+  </footer>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
