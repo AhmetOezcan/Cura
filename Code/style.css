@@ -1,0 +1,178 @@
+/* -------------------------------------- */
+/* 🏠 Grundlayout + Schriftart            */
+/* -------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Schriftart: Comic Neue (wird im HTML geladen) */
+    font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+    background: #ECEFF1; /* gräulicher Hintergrund */
+    padding-bottom: 90px; /* Platz für Footer */
+    color: #333;
+}
+
+/* -------------------------------------- */
+/* 🔷 Header / Topbar                     */
+/* -------------------------------------- */
+
+header {
+    width: 100%;
+    background: #27AE60; /* Grün */
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+header h1 {
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+/* -------------------------------------- */
+/* 📄 Karten für Bewohner (Article)       */
+/* -------------------------------------- */
+
+article {
+    /* Karten jetzt vollständig eingefärbt */
+    margin: 14px;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+    border-left: none; /* kein farbiger Balken mehr */
+    color: #1f2933; /* dunklere Textfarbe für Kontrast */
+}
+
+/* Jede Karte bekommt eine helle Hintergrundfarbe */
+.Bewohner1_Max_Mustermann {
+    background: #E6F9EA; /* Hellgrün */
+}
+
+.Bewohner1_Franz_Schmidt {
+    background: #FFF7D6; /* Hellgelb */
+}
+
+article:hover {
+    transform: scale(1.01);
+}
+
+article h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #166534; /* dunkles Grün für Überschrift */
+}
+
+article p {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+
+/* -------------------------------------- */
+/* ➕ Floating Action Button (FAB)        */
+/* -------------------------------------- */
+
+.Befehle {
+    position: fixed;
+    bottom: 95px;
+    right: 20px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    background: #BB6BD9; /* Lila */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.Befehle:hover {
+    transform: scale(1.1);
+}
+
+
+/* -------------------------------------- */
+/* 📌 Footer Navigation (Mobile-Style)    */
+/* -------------------------------------- */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: #ffffff;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Footer Buttons */
+footer button {
+    flex: 1;
+    height: 100%;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* Farben beim Auswählen / Hover */
+footer button:hover {
+    background: #E9F1FF;
+    color: #2F80ED;
+}
+
+/* Footer: spezielles Styling für Veranstaltungs-Icon */
+footer .footer-btn {
+    flex: 1;
+    height: 100%;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+footer .footer-btn .footer-icon {
+    width: 34px;
+    height: 34px;
+    padding: 6px;
+    border-radius: 50%;
+    background: rgba(39,174,96,0.12); /* heller grüner Kreis passend zum Header */
+    display: block;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+footer .footer-btn:hover .footer-icon {
+    background: rgba(39,174,96,0.18);
+    transform: scale(1.06);
+}
+
+/* Versteckte Beschriftung für Screenreader (falls benötigt) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
