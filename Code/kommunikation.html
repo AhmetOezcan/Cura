@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kommunikation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>KOMMUNIKATION</h1></header>
+
+    <main class="chat-container">
+        <ul id="messageList" class="message-list" aria-live="polite">
+            <!-- Beispielnachrichten -->
+            <li class="message-row">
+                <div class="avatar" style="background:#FDE68A">AS</div>
+                <div class="message-bubble">
+                    <div class="message-text">Guten Morgen, heute um 10 Uhr ist die Physiotherapie.</div>
+                    <div class="message-meta">09:05</div>
+                </div>
+            </li>
+
+            <li class="message-row">
+                <div class="avatar" style="background:#C7F9D6">MB</div>
+                <div class="message-bubble">
+                    <div class="message-text">Danke — ich komme mit Frau Müller.</div>
+                    <div class="message-meta">09:09</div>
+                </div>
+            </li>
+
+            <li class="message-row own">
+                <div class="avatar" style="background:#D6E4FF">ME</div>
+                <div class="message-bubble">
+                    <div class="message-text">Alles klar, bis dann!</div>
+                    <div class="message-meta">09:12</div>
+                </div>
+            </li>
+        </ul>
+    </main>
+
+    <!-- Eingabebereich fix oberhalb des Footers -->
+    <div class="chat-input-area">
+        <input type="text" placeholder="Nachricht eingeben..." aria-label="Nachricht eingeben">
+        <button type="button" class="send-btn" aria-label="Senden">Senden</button>
+    </div>
+
+    <footer>
+        <a href="Events.html" class="footer-link footer-btn" aria-label="Veranstaltungen">
+            <img src="icon/veranstaltung.png" alt="Veranstaltungen" class="footer-icon">
+        </a>
+        <a href="Bewohner.html" class="footer-link" aria-label="Bewohner">
+            <img src="icon/patient.png" alt="Bewohner" class="footer-icon">
+        </a>
+        <a href="Kommunikation.html" class="footer-link" aria-label="Kommunikation">
+            <img src="icon/plaudern.png" alt="Kommunikation" class="footer-icon">
+        </a>
+        <a href="Account.html" class="footer-link" aria-label="Account">
+            <img src="icon/konto.png" alt="Account" class="footer-icon">
+        </a>
+    </footer>
+</body>
+</html>

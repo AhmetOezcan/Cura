@@ -1,11 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
+    <!-- Comic-Schrift wie auf Bewohner -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <header><h1>EVENTS</h1></header>
+
+    <main class="events-container">
+        <!-- Heute -->
+        <section class="day-card">
+            <div class="day-header">
+                <h2>Heute</h2>
+                <span class="day-date">17.11.2025</span>
+            </div>
+            <div class="event-list">
+                <div class="event-item event-blue">
+                    <strong>Frühstücksgruppe</strong>
+                    <span class="event-time">08:30</span>
+                </div>
+                <div class="event-item event-green">
+                    <strong>Physiotherapie</strong>
+                    <span class="event-time">10:00</span>
+                </div>
+                <div class="event-item event-yellow">
+                    <strong>Musiktherapie</strong>
+                    <span class="event-time">15:00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dienstag -->
+        <section class="day-card">
+            <div class="day-header">
+                <h2>Dienstag</h2>
+                <span class="day-date">18.11.2025</span>
+            </div>
+            <div class="event-list">
+                <div class="event-item event-purple">
+                    <strong>Leserunde</strong>
+                    <span class="event-time">11:00</span>
+                </div>
+                <div class="event-item event-orange">
+                    <strong>Sturzprävention</strong>
+                    <span class="event-time">14:00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mittwoch -->
+        <section class="day-card">
+            <div class="day-header">
+                <h2>Mittwoch</h2>
+                <span class="day-date">19.11.2025</span>
+            </div>
+            <div class="event-list">
+                <div class="event-item event-blue">
+                    <strong>Kaffee & Klatsch</strong>
+                    <span class="event-time">10:30</span>
+                </div>
+                <div class="event-item event-green">
+                    <strong>Therapeutisches Basteln</strong>
+                    <span class="event-time">13:00</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="Events.html" class="footer-link footer-btn" aria-label="Veranstaltungen">
+            <img src="icon/veranstaltung.png" alt="Veranstaltungen" class="footer-icon">
+        </a>
+        <a href="Bewohner.html" class="footer-link" aria-label="Bewohner">
+            <img src="icon/patient.png" alt="Bewohner" class="footer-icon">
+        </a>
+        <a href="Kommunikation.html" class="footer-link" aria-label="Kommunikation">
+            <img src="icon/plaudern.png" alt="Kommunikation" class="footer-icon">
+        </a>
+        <a href="Account.html" class="footer-link" aria-label="Account">
+            <img src="icon/konto.png" alt="Account" class="footer-icon">
+        </a>
+    </footer>
 </body>
 </html>
