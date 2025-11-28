@@ -1,1 +1,0 @@
-Cura - Management Software für Pflegekräfte.
