@@ -3,27 +3,32 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
 
-
 from .database import Base, engine, get_db
 from . import models
 
 app = FastAPI()
 
-# CORS für Entwicklung erlauben
+# ------------------------------------------
+# CORS erlauben (für Verbindung zu Frontend)
+# ------------------------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # in Entwicklung: alles erlauben
+    allow_origins=["*"],  # für Entwicklung okay
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Tabellen in der Datenbank erzeugen
+# ------------------------------------------
+# Datenbank-Tabellen erzeugen
+# ------------------------------------------
 Base.metadata.create_all(bind=engine)
 
+# ------------------------------------------
+# Pydantic-Schemas
+# ------------------------------------------
 
-# Pydantic-Schemas (für API)
-
+# -------- Patienten --------
 class PatientBase(BaseModel):
     name: str
     age: int
@@ -44,14 +49,35 @@ class PatientOut(PatientBase):
         orm_mode = True
 
 
-# Test-Route
+# -------- Todos --------
+class TodoBase(BaseModel):
+    title: str
+    done: bool = False
 
+
+class TodoCreate(TodoBase):
+    pass
+
+
+class TodoOut(TodoBase):
+    id: int
+    patient_id: int
+
+    class Config:
+        orm_mode = True
+
+
+# ------------------------------------------
+# Test-Route
+# ------------------------------------------
 @app.get("/")
 def read_root():
-    return {"message": "Cura Backend läuft"}
+    return {"message": "Cura Backend läuft 🚑"}
 
 
+# ------------------------------------------
 # Patienten-Routen
+# ------------------------------------------
 
 @app.post("/patients", response_model=PatientOut)
 def create_patient(patient: PatientCreate, db: Session = Depends(get_db)):
@@ -73,3 +99,31 @@ def create_patient(patient: PatientCreate, db: Session = Depends(get_db)):
 def get_patients(db: Session = Depends(get_db)):
     patients = db.query(models.Patient).all()
     return patients
+
+
+# ------------------------------------------
+# Todo-Routen pro Patient
+# ------------------------------------------
+
+@app.post("/patients/{patient_id}/todos", response_model=TodoOut)
+def create_todo_for_patient(
+    patient_id: int,
+    todo: TodoCreate,
+    db: Session = Depends(get_db)
+):
+    db_todo = models.Todo(
+        patient_id=patient_id,
+        title=todo.title,
+        done=todo.done
+    )
+    db.add(db_todo)
+    db.commit()
+    db.refresh(db_todo)
+    return db_todo
+
+
+@app.get("/patients/{patient_id}/todos", response_model=list[TodoOut])
+def get_todos_for_patient(patient_id: int, db: Session = Depends(get_db)):
+    todos = db.query(models.Todo).filter(models.Todo.patient_id == patient_id).all()
+    return todos
+

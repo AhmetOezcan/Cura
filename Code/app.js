@@ -4,40 +4,94 @@ const API_BASE_URL = "http://127.0.0.1:8000";
 // Container für die Patienten-Karten holen
 const patientList = document.getElementById("patient-list");
 
-// Hilfsfunktion: eine Patientenkarte als <article> bauen
+
+// Eine Patientenkarte als <article> bauen
 function createPatientCard(patient) {
     const article = document.createElement("article");
     article.classList.add("patient-card");
+    article.dataset.patientId = patient.id; // später nutzbar für Detailseite
 
+    // Name
     const name = document.createElement("h2");
     name.textContent = patient.name;
 
-    const age = document.createElement("p");
-    age.textContent = `Alter: ${patient.age}`;
+    // Eckdaten in einer Zeile
+    const meta = document.createElement("p");
+    meta.classList.add("patient-meta");
+    meta.textContent = `${patient.age} Jahre • Zimmer ${patient.room_number} • ${patient.diagnosis}`;
 
-    const room = document.createElement("p");
-    room.textContent = `Zimmernummer: ${patient.room_number}`;
+    // Container für To-Do Vorschau
+    const todoTitle = document.createElement("h3");
+    todoTitle.textContent = "To-Do Vorschau";
+    todoTitle.classList.add("todo-preview-title");
 
-    const diagnosis = document.createElement("p");
-    diagnosis.textContent = `Diagnose: ${patient.diagnosis}`;
+    const todoList = document.createElement("ul");
+    todoList.classList.add("todo-preview-list");
 
-    const meds = document.createElement("p");
-    meds.textContent = `Medikamente: ${patient.medication}`;
-
-    const notes = document.createElement("p");
-    notes.textContent = `Notizen: ${patient.notes}`;
-
+    // Inhalte ins article packen
     article.appendChild(name);
-    article.appendChild(age);
-    article.appendChild(room);
-    article.appendChild(diagnosis);
-    article.appendChild(meds);
-    article.appendChild(notes);
+    article.appendChild(meta);
+    article.appendChild(todoTitle);
+    article.appendChild(todoList);
+
+    // To-Do Vorschau laden (ohne hinzufügen)
+    loadTodosPreviewForPatient(patient.id, todoList);
+
+    // später: Klick auf Karte → Detailseite
+    // article.addEventListener("click", () => { ... });
 
     return article;
 }
 
-// Patienten vom Backend laden und in die Seite einfügen
+
+// To-Do Vorschau (max. 3 Aufgaben) für einen Patienten laden
+async function loadTodosPreviewForPatient(patientId, listElement) {
+    try {
+        const resp = await fetch(`${API_BASE_URL}/patients/${patientId}/todos`);
+        if (!resp.ok) {
+            throw new Error("Fehler beim Laden der Todos");
+        }
+
+        const todos = await resp.json();
+        listElement.innerHTML = "";
+
+        if (todos.length === 0) {
+            const li = document.createElement("li");
+            li.textContent = "Noch keine Aufgaben.";
+            li.classList.add("todo-empty");
+            listElement.appendChild(li);
+            return;
+        }
+
+        // nur die ersten 3 To-Dos als Vorschau anzeigen
+        const previewTodos = todos.slice(0, 3);
+
+        previewTodos.forEach(todo => {
+            const li = document.createElement("li");
+            li.textContent = todo.title;
+            li.classList.add("todo-item");
+            listElement.appendChild(li);
+        });
+
+        // Wenn es mehr gibt, Hinweis anzeigen
+        if (todos.length > 3) {
+            const more = document.createElement("li");
+            more.textContent = `+ ${todos.length - 3} weitere Aufgabe(n)…`;
+            more.classList.add("todo-more");
+            listElement.appendChild(more);
+        }
+    } catch (err) {
+        console.error("Fehler beim Laden der To-Dos:", err);
+        listElement.innerHTML = "";
+        const li = document.createElement("li");
+        li.textContent = "Fehler beim Laden der To-Dos.";
+        li.classList.add("todo-error");
+        listElement.appendChild(li);
+    }
+}
+
+
+// Patienten vom Backend laden und Karten bauen
 async function loadPatients() {
     try {
         const response = await fetch(`${API_BASE_URL}/patients`);
@@ -64,7 +118,7 @@ async function loadPatients() {
             patientList.appendChild(info);
         }
     } catch (error) {
-        console.error(error);
+        console.error("Fehler beim Laden der Patienten:", error);
         const err = document.createElement("p");
         err.textContent = "Fehler beim Verbinden mit dem Server.";
         err.style.color = "red";
@@ -73,5 +127,6 @@ async function loadPatients() {
     }
 }
 
-// Wenn Seite geladen ist → Patienten holen
+
+// Wenn Seite geladen ist → Patienten laden
 document.addEventListener("DOMContentLoaded", loadPatients);
