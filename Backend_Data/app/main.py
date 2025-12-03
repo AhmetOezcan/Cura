@@ -1,11 +1,22 @@
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from .database import Base, engine, get_db
 from . import models
 
 app = FastAPI()
+
+# CORS für Entwicklung erlauben
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # in Entwicklung: alles erlauben
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Tabellen in der Datenbank erzeugen
 Base.metadata.create_all(bind=engine)

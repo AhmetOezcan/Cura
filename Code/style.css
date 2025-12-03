@@ -50,13 +50,23 @@ article {
     color: #1f2933; /* dunklere Textfarbe für Kontrast */
 }
 
-/* Jede Karte bekommt eine helle Hintergrundfarbe */
-.Bewohner1_Max_Mustermann {
-    background: #E6F9EA; /* Hellgrün */
+/* Backend-generierte Patient-Karten: Farbrotation */
+.patient-card {
+    background: #E6F9EA; /* Hellgrün (default) */
 }
 
-.Bewohner1_Franz_Schmidt {
-    background: #FFF7D6; /* Hellgelb */
+/* Alle ungeraden Patienten → Hellgelb */
+.patient-card:nth-child(odd) {
+    background: #FFF7D6;
+}
+
+/* Weitere Farben für mehr Abwechslung (optional) */
+.patient-card:nth-child(3n) {
+    background: #E6F3FF; /* Hellblau */
+}
+
+.patient-card:nth-child(4n) {
+    background: #FFE6F0; /* Hellrosa */
 }
 
 article:hover {
