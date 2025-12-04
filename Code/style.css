@@ -48,6 +48,10 @@ article {
     transition: transform 0.2s ease;
     border-left: none; /* kein farbiger Balken mehr */
     color: #1f2933; /* dunklere Textfarbe für Kontrast */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 /* Backend-generierte Patient-Karten: Farbrotation */
@@ -79,9 +83,49 @@ article h2 {
     color: #166534; /* dunkles Grün für Überschrift */
 }
 
+article h3 {
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    color: #166534;
+}
+
 article p {
     margin-bottom: 6px;
     font-size: 15px;
+}
+
+/* To-Do Vorschau Styles */
+.todo-preview-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.todo-item {
+    font-size: 13px;
+    color: #333;
+    padding: 6px 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 6px;
+}
+
+.todo-empty,
+.todo-error {
+    font-size: 12px;
+    color: #888;
+    padding: 6px 8px;
+}
+
+.todo-more {
+    font-size: 12px;
+    color: #166534;
+    padding: 6px 8px;
+    font-weight: 600;
 }
 
 

@@ -15,14 +15,9 @@ function createPatientCard(patient) {
     const name = document.createElement("h2");
     name.textContent = patient.name;
 
-    // Eckdaten in einer Zeile
-    const meta = document.createElement("p");
-    meta.classList.add("patient-meta");
-    meta.textContent = `${patient.age} Jahre • Zimmer ${patient.room_number} • ${patient.diagnosis}`;
-
     // Container für To-Do Vorschau
     const todoTitle = document.createElement("h3");
-    todoTitle.textContent = "To-Do Vorschau";
+    todoTitle.textContent = "To-Dos";
     todoTitle.classList.add("todo-preview-title");
 
     const todoList = document.createElement("ul");
@@ -30,7 +25,6 @@ function createPatientCard(patient) {
 
     // Inhalte ins article packen
     article.appendChild(name);
-    article.appendChild(meta);
     article.appendChild(todoTitle);
     article.appendChild(todoList);
 
