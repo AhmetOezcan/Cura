@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patientenseite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hauptbereich -->
+    <main id="patient-page">
+        <!-- Rückpfeil -->
+    <button id="back-btn" class="back-button" aria-label="Zurück">←</button>
+
+        <!-- Patient Info mit Avatar (oben) -->
+        <section class="patient-info-header">
+            <div class="patient-avatar">
+                <img id="avatar-img" src="" alt="Avatar" class="avatar-image">
+            </div>
+            <div class="patient-header-details">
+                <h1 id="patient-name">Name</h1>
+                <div class="patient-quick-info">
+                    <p><span class="info-label">Alter:</span> <span id="patient-age">-</span> Jahre</p>
+                    <p><span class="info-label">Zimmer:</span> <span id="patient-room">-</span></p>
+                    <p><span class="info-label">Diagnose:</span> <span id="patient-diagnosis">-</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard-Kästen (später zu erweitern) -->
+        <section class="dashboard-containers">
+            <!-- To-Do Liste -->
+            <div class="dashboard-box" id="todos-box">
+                <h3>To-Dos</h3>
+                <ul id="todos-list" class="box-content">
+                    <li>Lädt...</li>
+                </ul>
+            </div>
+
+            <!-- Medikamente -->
+            <div class="dashboard-box" id="medication-box">
+                <h3>Medikamente</h3>
+                <p id="medication-text" class="box-content">
+                    Lädt...
+                </p>
+            </div>
+
+            <!-- Notizen -->
+            <div class="dashboard-box" id="notes-box">
+                <h3>Notizen</h3>
+                <p id="notes-text" class="box-content">
+                    Lädt...
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="patientenseite.js"></script>
+</body>
+</html>

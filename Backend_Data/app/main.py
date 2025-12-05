@@ -5,12 +5,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .database import Base, engine, get_db
 from . import models
+from fastapi import HTTPException
+from typing import Optional
+
 
 app = FastAPI()
 
-# ------------------------------------------
+
 # CORS erlauben (für Verbindung zu Frontend)
-# ------------------------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # für Entwicklung okay
@@ -19,14 +21,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ------------------------------------------
 # Datenbank-Tabellen erzeugen
-# ------------------------------------------
 Base.metadata.create_all(bind=engine)
 
-# ------------------------------------------
+
 # Pydantic-Schemas
-# ------------------------------------------
 
 # -------- Patienten --------
 class PatientBase(BaseModel):
@@ -66,18 +65,42 @@ class TodoOut(TodoBase):
     class Config:
         orm_mode = True
 
+# ---------------------------
+# Todo-Update Schema
+# ---------------------------
+class TodoUpdate(BaseModel):
+    title: Optional[str] = None
+    done: Optional[bool] = None
 
-# ------------------------------------------
+
+# ---------------------------
+# Todo Update Route (PATCH)
+# ---------------------------
+@app.patch("/todos/{todo_id}", response_model=TodoOut)
+def update_todo(todo_id: int, todo: TodoUpdate, db: Session = Depends(get_db)):
+    db_todo = db.query(models.Todo).filter(models.Todo.id == todo_id).first()
+    if not db_todo:
+        raise HTTPException(status_code=404, detail="Todo nicht gefunden")
+
+    # Nur übergebene Felder updaten
+    if todo.title is not None:
+        db_todo.title = todo.title
+    if todo.done is not None:
+        db_todo.done = todo.done
+
+    db.add(db_todo)
+    db.commit()
+    db.refresh(db_todo)
+    return db_todo
+
+
 # Test-Route
-# ------------------------------------------
 @app.get("/")
 def read_root():
     return {"message": "Cura Backend läuft 🚑"}
 
 
-# ------------------------------------------
 # Patienten-Routen
-# ------------------------------------------
 
 @app.post("/patients", response_model=PatientOut)
 def create_patient(patient: PatientCreate, db: Session = Depends(get_db)):
@@ -100,10 +123,15 @@ def get_patients(db: Session = Depends(get_db)):
     patients = db.query(models.Patient).all()
     return patients
 
+@app.get("/patients/{patient_id}", response_model=PatientOut)
+def get_patient(patient_id: int, db: Session = Depends(get_db)):
+    patient = db.query(models.Patient).filter(models.Patient.id == patient_id).first()
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient nicht gefunden")
+    return patient
 
-# ------------------------------------------
+
 # Todo-Routen pro Patient
-# ------------------------------------------
 
 @app.post("/patients/{patient_id}/todos", response_model=TodoOut)
 def create_todo_for_patient(

@@ -31,9 +31,10 @@ function createPatientCard(patient) {
     // To-Do Vorschau laden (ohne hinzufügen)
     loadTodosPreviewForPatient(patient.id, todoList);
 
-    // später: Klick auf Karte → Detailseite
-    // article.addEventListener("click", () => { ... });
-
+    // Klick auf Karte → zur Detailseite
+    article.addEventListener("click", () => {
+        window.location.href = `patientenseite.html?id=${patient.id}`;
+});
     return article;
 }
 
@@ -61,11 +62,19 @@ async function loadTodosPreviewForPatient(patientId, listElement) {
         const previewTodos = todos.slice(0, 3);
 
         previewTodos.forEach(todo => {
-            const li = document.createElement("li");
-            li.textContent = todo.title;
-            li.classList.add("todo-item");
-            listElement.appendChild(li);
-        });
+    const li = document.createElement("li");
+    li.textContent = todo.title;
+    li.classList.add("todo-item");
+
+    // Status-Klasse hinzufügen
+    if (todo.done) {
+        li.classList.add("todo-done");
+    } else {
+        li.classList.add("todo-pending");
+    }
+
+    listElement.appendChild(li);
+});
 
         // Wenn es mehr gibt, Hinweis anzeigen
         if (todos.length > 3) {

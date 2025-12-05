@@ -16,5 +16,7 @@ TO-Do Liste einfügen
 04.12 Patientenseite erstellen, UI-Design zeichnen
 + Interview Pflegekraft
 
+05.12 Patientenseite fertigstellen und desginen, mit backend verbinden
+
 
 

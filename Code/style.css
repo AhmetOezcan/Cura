@@ -578,3 +578,270 @@ footer .footer-link:focus {
     .account-actions { margin: 10px; gap: 8px; }
     .action-item { padding: 10px 12px; font-size: 15px; }
 }
+
+/* ----------------------------- */
+/* Patientenseite — Header & Boxen */
+/* ----------------------------- */
+
+#patient-page {
+    position: relative;
+    padding: 18px 16px 40px;
+    max-width: 980px;
+    margin: 0 auto;
+    background: transparent;
+}
+
+/* Rückpfeil links oben (innerhalb von #patient-page) */
+.back-button {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    color: #166534;
+    text-decoration: none;
+    background: transparent;
+    border-radius: 8px;
+    transition: background 0.12s ease, transform 0.12s ease;
+    z-index: 20;
+
+    /* Button-spezifisch: Reset / Accessibility */
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Hover / Fokus */
+.back-button:hover {
+    background: rgba(22,101,52,0.06);
+    transform: translateY(-1px);
+}
+
+.back-button:focus {
+    outline: 3px solid rgba(22,101,52,0.14);
+    outline-offset: 2px;
+}
+
+/* Patient-Info (kein sichtbares Box-Design) */
+.patient-info-header {
+    width: 100%;
+    background: transparent;    /* kein weißer Hintergrund mehr */
+    border-radius: 0;           /* keine abgerundete Box */
+    padding: 8px 6px;           /* leichter Abstand, kein Box-Padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: none;           /* sicherstellen, dass kein Schatten da ist */
+}
+
+/* Avatar zentriert (gleiche Optik wie vorher) */
+.patient-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #E6F9EA, #DFF5E6);
+    flex: 0 0 96px;
+}
+
+/* Details nebeneinander und zentriert */
+.patient-header-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Eckdaten als inline-Row (nebeneinander) */
+.patient-quick-info {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+/* Dashboard-Boxen */
+.dashboard-containers {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+/* größere Displays zwei Spalten */
+@media (min-width: 760px) {
+    .dashboard-containers {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* einzelne Boxen als "Dashboard-Karten" */
+.dashboard-box {
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 8px 22px rgba(6, 30, 10, 0.06);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.dashboard-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(6, 30, 10, 0.08);
+}
+
+.dashboard-box h3 {
+    margin: 0 0 8px 0;
+    color: #166534;
+    font-size: 16px;
+}
+
+.box-content {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Responsive: auf sehr kleinen Bildschirmen alles kompakt und vertikal */
+@media (max-width: 520px) {
+    .patient-info-header {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .patient-header-details {
+        align-items: center;
+    }
+
+    .patient-quick-info {
+        gap: 8px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .back-button {
+        top: 8px;
+        left: 8px;
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
+    }
+
+    .dashboard-containers {
+        gap: 12px;
+    }
+}
+
+/* To-Do interaktiv: runde Checkboxen */
+.todos-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.todo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: transparent;
+    transition: background 0.12s ease, transform 0.08s ease;
+}
+
+.todo-row:hover {
+    background: rgba(0,0,0,0.02);
+    transform: translateY(-1px);
+}
+
+/* rundes Kästchen (checkbox-like) */
+.todo-checkbox {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    border: 2px solid #cbd5d1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    cursor: pointer;
+    transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+/* Häkchen / innerer Punkt (hidden by default) */
+.todo-checkbox .check {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 0.12s ease, transform 0.12s ease;
+    transform: scale(0.8);
+}
+
+/* === Todo: nur Checkbox grün, Text unverändert === */
+.todo-row.todo-done .todo-checkbox {
+    background: #27AE60; /* grünes Kästchen */
+    border-color: #27AE60;
+}
+
+.todo-row.todo-done .todo-checkbox .check {
+    background: #ffffff; /* innerer Punkt bleibt weiß */
+}
+
+/* Beschreibungstext bleibt unverändert und sichtbar */
+.todo-row.todo-done .todo-title {
+    color: #263238;        /* gleiche Farbe wie normale Tasks */
+    text-decoration: none; /* kein Durchstreichen */
+    opacity: 1;            /* volle Sichtbarkeit */
+}
+
+/* optional: dezenter Zeilenhintergrund (entfernen, wenn nicht gewünscht) */
+.todo-row.todo-done {
+    background: rgba(39,174,96,0.06);
+}
+
+/* kleine Bildschirme: kompakter */
+@media (max-width: 520px) {
+    .todo-checkbox { width: 20px; height: 20px; min-width: 20px; }
+    .todo-checkbox .check { width: 10px; height: 10px; }
+    .todo-title { font-size: 14px; }
+}
+
+/* To-Do Vorschau: farbige Schattierungen nach Status */
+.todo-preview-list .todo-item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: background 0.18s ease, transform 0.12s ease;
+    display: block;
+}
+
+/* Erledigt: grüner, dezenter Hintergrund */
+.todo-preview-list .todo-item.todo-done {
+    background: linear-gradient(90deg, rgba(230,249,234,1), rgba(240,255,240,0.95));
+    color: #166534;
+    border-left: 4px solid #27AE60;
+}
+
+/* Noch offen / nicht erledigt: roter, dezenter Hintergrund */
+.todo-preview-list .todo-item.todo-pending {
+    background: linear-gradient(90deg, rgba(255,235,235,1), rgba(255,245,245,0.95));
+    color: #7a1c1c;
+    border-left: 4px solid #F44336;
+}
+
+/* optional: Hover leicht heben */
+.todo-preview-list .todo-item:hover {
+    transform: translateY(-2px);
+}
