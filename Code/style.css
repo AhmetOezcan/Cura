@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* -------------------------------------- */
 /* 🏠 Grundlayout + Schriftart            */
 /* -------------------------------------- */
@@ -9,11 +11,19 @@
 }
 
 body {
-    /* Schriftart: Comic Neue (wird im HTML geladen) */
-    font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+    /* Schriftart: Inter (global geladen) */
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: #ECEFF1; /* gräulicher Hintergrund */
     padding-bottom: 90px; /* Platz für Footer */
     color: #333;
+}
+
+/* Dunkles Thema für die Bewohner-Übersicht */
+body.resident-theme {
+    background: #162238;
+    color: #e5e7eb;
+    padding: 28px 14px 110px;
+    min-height: 100vh;
 }
 
 /* -------------------------------------- */
@@ -30,9 +40,48 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
+/* Header ohne eigene Box auf der Bewohnerseite */
+body.resident-theme header {
+    background: transparent;
+    box-shadow: none;
+    padding: 10px 0 18px;
+    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 header h1 {
     font-size: 22px;
     letter-spacing: 1px;
+}
+
+body.resident-theme header h1 {
+    font-size: 24px;
+    letter-spacing: 0.6px;
+    flex: 1;
+    text-align: center;
+}
+
+body.resident-theme header .icon-btn {
+    min-width: 42px;
+    height: 42px;
+    border: none;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f8fafc;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+body.resident-theme header .icon-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
 }
 
 /* -------------------------------------- */
@@ -40,59 +89,144 @@ header h1 {
 /* -------------------------------------- */
 
 article {
-    /* Karten jetzt vollständig eingefärbt */
+    /* Standardkarten (werden für Bewohner überschrieben) */
     margin: 14px;
     padding: 18px;
     border-radius: 18px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transition: transform 0.2s ease;
-    border-left: none; /* kein farbiger Balken mehr */
-    color: #1f2933; /* dunklere Textfarbe für Kontrast */
+    border-left: none;
+    color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-/* Backend-generierte Patient-Karten: Farbrotation */
-.patient-card {
-    background: #E6F9EA; /* Hellgrün (default) */
+/* Raster + Karten auf dunklem Hintergrund für Bewohnerliste */
+body.resident-theme #patient-list {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    background: #0F1A2B;
+    padding: 18px;
+    border-radius: 28px;
+    box-shadow: 0 26px 66px rgba(0, 0, 0, 0.45);
 }
 
-/* Alle ungeraden Patienten → Hellgelb */
-.patient-card:nth-child(odd) {
-    background: #FFF7D6;
+body.resident-theme article.patient-card {
+    margin: 0;
+    padding: 16px 14px;
+    border-radius: 22px;
+    color: #f8fafc;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+    min-height: 170px;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+    gap: 10px;
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
 }
 
-/* Weitere Farben für mehr Abwechslung (optional) */
-.patient-card:nth-child(3n) {
-    background: #E6F3FF; /* Hellblau */
+body.resident-theme article.patient-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.36);
 }
 
-.patient-card:nth-child(4n) {
-    background: #FFE6F0; /* Hellrosa */
+body.resident-theme article.patient-card h2 {
+    font-size: 18px;
+    margin: 0;
+    color: #fdfdfd;
+    letter-spacing: 0.2px;
 }
 
-article:hover {
-    transform: scale(1.01);
+body.resident-theme article.patient-card h3 {
+    font-size: 13px;
+    margin: 4px 0 6px;
+    color: rgba(255, 255, 255, 0.82);
+    letter-spacing: 0.3px;
 }
 
-article h2 {
-    font-size: 20px;
-    margin-bottom: 8px;
-    color: #166534; /* dunkles Grün für Überschrift */
-}
-
-article h3 {
+body.resident-theme article.patient-card p,
+body.resident-theme article.patient-card li {
     font-size: 14px;
-    margin-top: 12px;
-    margin-bottom: 8px;
-    color: #166534;
+    color: #f8fafc;
 }
 
-article p {
-    margin-bottom: 6px;
-    font-size: 15px;
+/* Farbrotation wie im Referenzbild */
+body.resident-theme .patient-card:nth-child(6n + 1) {
+    background: linear-gradient(150deg, #7c3aed, #a855f7);
+}
+
+body.resident-theme .patient-card:nth-child(6n + 2) {
+    background: linear-gradient(150deg, #fb7185, #f97316);
+}
+
+body.resident-theme .patient-card:nth-child(6n + 3) {
+    background: linear-gradient(150deg, #fbbf24, #f59e0b);
+    color: #0b1220;
+}
+
+body.resident-theme .patient-card:nth-child(6n + 4) {
+    background: linear-gradient(150deg, #38bdf8, #22d3ee);
+}
+
+body.resident-theme .patient-card:nth-child(6n + 5) {
+    background: linear-gradient(150deg, #22c55e, #16a34a);
+}
+
+body.resident-theme .patient-card:nth-child(6n) {
+    background: linear-gradient(150deg, #34d399, #2dd4bf);
+    color: #0b1220;
+}
+
+/* To-Do Vorschau in den Karten */
+body.resident-theme .todo-preview-list {
+    gap: 6px;
+}
+
+body.resident-theme .todo-preview-list .todo-item,
+body.resident-theme .todo-preview-list .todo-empty,
+body.resident-theme .todo-preview-list .todo-error,
+body.resident-theme .todo-preview-list .todo-more {
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+    color: #fdfdfd;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-item,
+body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-item,
+body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-empty,
+body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-empty,
+body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-error,
+body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-error,
+body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-more,
+body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-more {
+    color: #0b1220;
+}
+
+/* Done-Tasks: kleiner Haken rechts statt alter Formatierung */
+body.resident-theme .todo-preview-list .todo-item.todo-done {
+    border: none;
+}
+
+body.resident-theme .todo-preview-list .todo-item.todo-done::after {
+    content: "✓";
+    font-weight: 700;
+    font-size: 13px;
+    color: #fdfdfd;
+}
+
+body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-item.todo-done::after,
+body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-item.todo-done::after {
+    color: #0b1220;
 }
 
 /* To-Do Vorschau Styles */
@@ -247,6 +381,40 @@ footer .footer-link:hover {
 footer .footer-link:focus {
     outline: 3px solid rgba(47,128,237,0.18);
     outline-offset: -3px;
+}
+
+/* Footer-Optik auf der Bewohnerseite (heller Pill auf dunklem Hintergrund) */
+body.resident-theme footer {
+    background: rgba(250, 250, 252, 0.94);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 26px 26px 0 0;
+    height: 76px;
+    width: calc(100% - 20px);
+    max-width: 760px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 6px;
+}
+
+body.resident-theme footer .footer-link,
+body.resident-theme footer .footer-btn {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+body.resident-theme footer .footer-icon {
+    background: rgba(15, 23, 42, 0.08);
+}
+
+body.resident-theme footer .footer-btn:hover .footer-icon,
+body.resident-theme footer .footer-link:hover .footer-icon {
+    background: rgba(15, 23, 42, 0.18);
+}
+
+body.resident-theme footer .footer-link:hover {
+    background: rgba(15, 23, 42, 0.06);
+    color: #0f172a;
 }
 
 /* Versteckte Beschriftung für Screenreader (falls benötigt) */
@@ -836,9 +1004,9 @@ footer .footer-link:focus {
 
 /* Noch offen / nicht erledigt: roter, dezenter Hintergrund */
 .todo-preview-list .todo-item.todo-pending {
-    background: linear-gradient(90deg, rgba(255,235,235,1), rgba(255,245,245,0.95));
-    color: #7a1c1c;
-    border-left: 4px solid #F44336;
+    background: transparent;
+    color: inherit;
+    border-left: none;
 }
 
 /* optional: Hover leicht heben */
