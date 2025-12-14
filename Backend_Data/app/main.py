@@ -15,7 +15,7 @@ app = FastAPI()
 # CORS erlauben (für Verbindung zu Frontend)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # für Entwicklung okay
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,9 +25,8 @@ app.add_middleware(
 Base.metadata.create_all(bind=engine)
 
 
-# Pydantic-Schemas
 
-# -------- Patienten --------
+# Patienten
 class PatientBase(BaseModel):
     name: str
     age: int
@@ -48,7 +47,7 @@ class PatientOut(PatientBase):
         orm_mode = True
 
 
-# -------- Todos --------
+#Todos
 class TodoBase(BaseModel):
     title: str
     done: bool = False
@@ -65,9 +64,7 @@ class TodoOut(TodoBase):
     class Config:
         orm_mode = True
 
-# ---------------------------
 # Todo-Update Schema
-# ---------------------------
 class TodoUpdate(BaseModel):
     title: Optional[str] = None
     done: Optional[bool] = None
@@ -76,9 +73,7 @@ class TodoUpdate(BaseModel):
 
 
 
-# ---------------------------
 # Todo Update Route (PATCH)
-# ---------------------------
 @app.patch("/todos/{todo_id}", response_model=TodoOut)
 def update_todo(todo_id: int, todo: TodoUpdate, db: Session = Depends(get_db)):
     db_todo = db.query(models.Todo).filter(models.Todo.id == todo_id).first()
