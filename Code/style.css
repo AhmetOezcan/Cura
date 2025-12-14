@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* -------------------------------------- */
-/* 🏠 Grundlayout + Schriftart            */
-/* -------------------------------------- */
-
 * {
     margin: 0;
     padding: 0;
@@ -11,10 +7,9 @@
 }
 
 body {
-    /* Schriftart: Inter (global geladen) */
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #ECEFF1; /* gräulicher Hintergrund */
-    padding-bottom: 90px; /* Platz für Footer */
+    background: #ECEFF1;
+    padding-bottom: 90px;
     color: #333;
 }
 
@@ -26,13 +21,11 @@ body.resident-theme {
     min-height: 100vh;
 }
 
-/* -------------------------------------- */
-/* 🔷 Header / Topbar                     */
-/* -------------------------------------- */
+/*Header / Topbar*/
 
 header {
     width: 100%;
-    background: #27AE60; /* Grün */
+    background: #27AE60;
     color: white;
     padding: 18px;
     text-align: center;
@@ -40,7 +33,6 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Header ohne eigene Box auf der Bewohnerseite */
 body.resident-theme header {
     background: transparent;
     box-shadow: none;
@@ -84,12 +76,9 @@ body.resident-theme header .icon-btn:hover {
     transform: translateY(-1px);
 }
 
-/* -------------------------------------- */
-/* 📄 Karten für Bewohner (Article)       */
-/* -------------------------------------- */
+/* Karten für Bewohner (Article) */
 
 article {
-    /* Standardkarten (werden für Bewohner überschrieben) */
     margin: 14px;
     padding: 18px;
     border-radius: 18px;
@@ -103,7 +92,6 @@ article {
     text-align: center;
 }
 
-/* Raster + Karten auf dunklem Hintergrund für Bewohnerliste */
 body.resident-theme #patient-list {
     max-width: 960px;
     margin: 0 auto;
@@ -123,9 +111,9 @@ body.resident-theme article.patient-card {
     color: #f8fafc;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
     min-height: 170px;
-    justify-content: space-between;
-    align-items: flex-start;
-    text-align: left;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 10px;
     transition: transform 0.16s ease, box-shadow 0.16s ease;
 }
@@ -140,6 +128,7 @@ body.resident-theme article.patient-card h2 {
     margin: 0;
     color: #fdfdfd;
     letter-spacing: 0.2px;
+    width: 100%;
 }
 
 body.resident-theme article.patient-card h3 {
@@ -155,6 +144,12 @@ body.resident-theme article.patient-card li {
     color: #f8fafc;
 }
 
+body.resident-theme .patient-room {
+    font-size: 12px;
+    opacity: 0.82;
+    letter-spacing: 0.4px;
+}
+
 /* Farbrotation wie im Referenzbild */
 body.resident-theme .patient-card:nth-child(6n + 1) {
     background: linear-gradient(150deg, #7c3aed, #a855f7);
@@ -166,7 +161,7 @@ body.resident-theme .patient-card:nth-child(6n + 2) {
 
 body.resident-theme .patient-card:nth-child(6n + 3) {
     background: linear-gradient(150deg, #fbbf24, #f59e0b);
-    color: #0b1220;
+    color: #fdfdfd;
 }
 
 body.resident-theme .patient-card:nth-child(6n + 4) {
@@ -179,12 +174,13 @@ body.resident-theme .patient-card:nth-child(6n + 5) {
 
 body.resident-theme .patient-card:nth-child(6n) {
     background: linear-gradient(150deg, #34d399, #2dd4bf);
-    color: #0b1220;
+    color: #fdfdfd;
 }
 
 /* To-Do Vorschau in den Karten */
 body.resident-theme .todo-preview-list {
     gap: 6px;
+    text-align: left;
 }
 
 body.resident-theme .todo-preview-list .todo-item,
@@ -209,10 +205,9 @@ body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-err
 body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-error,
 body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-more,
 body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-more {
-    color: #0b1220;
+    color: #fdfdfd;
 }
 
-/* Done-Tasks: kleiner Haken rechts statt alter Formatierung */
 body.resident-theme .todo-preview-list .todo-item.todo-done {
     border: none;
 }
@@ -226,7 +221,7 @@ body.resident-theme .todo-preview-list .todo-item.todo-done::after {
 
 body.resident-theme .patient-card:nth-child(6n + 3) .todo-preview-list .todo-item.todo-done::after,
 body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-item.todo-done::after {
-    color: #0b1220;
+    color: #fdfdfd;
 }
 
 /* To-Do Vorschau Styles */
@@ -262,10 +257,7 @@ body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-item.to
     font-weight: 600;
 }
 
-
-/* -------------------------------------- */
-/* ➕ Floating Action Button (FAB)        */
-/* -------------------------------------- */
+/* Floating Action Button (FAB)        */
 
 .Befehle {
     position: fixed;
@@ -278,7 +270,7 @@ body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-item.to
     font-size: 30px;
     font-weight: bold;
     color: white;
-    background: #BB6BD9; /* Lila */
+    background: #BB6BD9;
     box-shadow: 0 6px 18px rgba(0,0,0,0.25);
     cursor: pointer;
     transition: 0.2s ease;
@@ -288,10 +280,7 @@ body.resident-theme .patient-card:nth-child(6n) .todo-preview-list .todo-item.to
     transform: scale(1.1);
 }
 
-
-/* -------------------------------------- */
-/* 📌 Footer Navigation (Mobile-Style)    */
-/* -------------------------------------- */
+/* Footer Navigation (Mobile-Style)    */
 
 footer {
     position: fixed;
@@ -305,7 +294,6 @@ footer {
     align-items: center;
 }
 
-/* Footer Buttons */
 footer button {
     flex: 1;
     height: 100%;
@@ -318,13 +306,11 @@ footer button {
     transition: 0.2s ease;
 }
 
-/* Farben beim Auswählen / Hover */
 footer button:hover {
     background: #E9F1FF;
     color: #2F80ED;
 }
 
-/* Footer: spezielles Styling für Veranstaltungs-Icon */
 footer .footer-btn {
     flex: 1;
     height: 100%;
@@ -337,25 +323,22 @@ footer .footer-btn {
     padding: 0;
 }
 
-/* Einheitliche Größe / Stil für alle Footer-Icons (wie Events) */
 footer .footer-icon {
     width: 34px;
     height: 34px;
     padding: 6px;
     border-radius: 50%;
-    background: rgba(39,174,96,0.12); /* heller grüner Kreis */
+    background: rgba(39,174,96,0.12);
     display: block;
     transition: transform 0.15s ease, background 0.15s ease;
 }
 
-/* Hover-Effekt für Icons in Links oder Buttons */
 footer .footer-btn:hover .footer-icon,
 footer .footer-link:hover .footer-icon {
     background: rgba(39,174,96,0.18);
     transform: scale(1.06);
 }
 
-/* Footer Links: gleiche Optik wie Buttons */
 footer .footer-link {
     flex: 1;
     height: 100%;
@@ -372,7 +355,6 @@ footer .footer-link {
     transition: 0.2s ease;
 }
 
-/* Hover / Active Zustand für Links */
 footer .footer-link:hover {
     background: #E9F1FF;
     color: #2F80ED;
@@ -383,7 +365,6 @@ footer .footer-link:focus {
     outline-offset: -3px;
 }
 
-/* Footer-Optik auf der Bewohnerseite (heller Pill auf dunklem Hintergrund) */
 body.resident-theme footer {
     background: rgba(250, 250, 252, 0.94);
     backdrop-filter: blur(12px);
@@ -430,17 +411,13 @@ body.resident-theme footer .footer-link:hover {
     border: 0;
 }
 
-/* -------------------------------------- */
-/* 📅 Events-Seite: Tageskarten          */
-/* -------------------------------------- */
+/* Events-Seite: Tageskarten   */
 
-/* Events-Seite: Container */
 .events-container {
     padding: 12px;
-    padding-bottom: 110px; /* Platz für Footer */
+    padding-bottom: 110px;
 }
 
-/* Tageskarte */
 .day-card {
     background: white;
     margin: 12px 14px;
@@ -449,7 +426,6 @@ body.resident-theme footer .footer-link:hover {
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
-/* Kopf der Tageskarte: Titel + Datum */
 .day-header {
     display: flex;
     justify-content: space-between;
@@ -459,7 +435,7 @@ body.resident-theme footer .footer-link:hover {
 
 .day-header h2 {
     font-size: 18px;
-    color: #166534; /* dunkles Grün passend zum Header */
+    color: #166534;
 }
 
 .day-date {
@@ -467,14 +443,12 @@ body.resident-theme footer .footer-link:hover {
     color: #6b7280;
 }
 
-/* Liste der Events innerhalb einer Tageskarte */
 .event-list {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-/* Einzelnes Event */
 .event-item {
     display: flex;
     justify-content: space-between;
@@ -486,7 +460,6 @@ body.resident-theme footer .footer-link:hover {
     box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
-/* Zeit-Stil (rechts) */
 .event-time {
     font-weight: 700;
     font-size: 13px;
@@ -494,7 +467,6 @@ body.resident-theme footer .footer-link:hover {
     margin-left: 10px;
 }
 
-/* Farbvarianten für einzelne Events */
 .event-blue {
     background: linear-gradient(90deg, rgba(230,243,255,1), rgba(224,248,255,0.9));
     color: #0f4c81;
@@ -520,20 +492,117 @@ body.resident-theme footer .footer-link:hover {
     color: #8a4b00;
 }
 
-/* Kleine Anpassung: bei sehr kleinem Viewport Karten etwas kompakter */
+body.resident-theme .events-container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #0F1A2B;
+    padding: 18px;
+    border-radius: 28px;
+    box-shadow: 0 26px 66px rgba(0, 0, 0, 0.45);
+    display: grid;
+    gap: 16px;
+}
+
+body.resident-theme .day-card {
+    margin: 0;
+    padding: 16px 14px;
+    border-radius: 22px;
+    color: #f8fafc;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.38);
+}
+
+body.resident-theme .day-card:nth-child(6n + 1) {
+    background: linear-gradient(150deg, #7c3aed, #a855f7);
+}
+
+body.resident-theme .day-card:nth-child(6n + 2) {
+    background: linear-gradient(150deg, #fb7185, #f97316);
+}
+
+body.resident-theme .day-card:nth-child(6n + 3) {
+    background: linear-gradient(150deg, #fbbf24, #f59e0b);
+    color: #fdfdfd;
+}
+
+body.resident-theme .day-card:nth-child(6n + 4) {
+    background: linear-gradient(150deg, #38bdf8, #22d3ee);
+}
+
+body.resident-theme .day-card:nth-child(6n + 5) {
+    background: linear-gradient(150deg, #22c55e, #16a34a);
+}
+
+body.resident-theme .day-card:nth-child(6n) {
+    background: linear-gradient(150deg, #34d399, #2dd4bf);
+    color: #fdfdfd;
+}
+
+body.resident-theme .day-header {
+    margin-bottom: 12px;
+}
+
+body.resident-theme .day-header h2 {
+    color: inherit;
+}
+
+body.resident-theme .day-date {
+    color: inherit;
+    opacity: 0.78;
+}
+
+body.resident-theme .event-list {
+    gap: 10px;
+}
+
+body.resident-theme .event-item {
+    background: rgba(15, 23, 42, 0.18);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.28);
+    backdrop-filter: blur(6px);
+}
+
+body.resident-theme .event-time {
+    color: inherit;
+    opacity: 0.9;
+}
+
+body.resident-theme .event-blue {
+    background: linear-gradient(120deg, rgba(96, 165, 250, 0.24), rgba(129, 140, 248, 0.18));
+    color: #e0f2fe;
+}
+
+body.resident-theme .event-green {
+    background: linear-gradient(120deg, rgba(52, 211, 153, 0.3), rgba(34, 197, 94, 0.2));
+    color: #e8fdf2;
+}
+
+body.resident-theme .event-yellow {
+    background: linear-gradient(120deg, rgba(251, 191, 36, 0.3), rgba(234, 179, 8, 0.18));
+    color: #fdfdfd;
+}
+
+body.resident-theme .event-purple {
+    background: linear-gradient(120deg, rgba(167, 139, 250, 0.3), rgba(236, 72, 153, 0.18));
+    color: #f5f3ff;
+}
+
+body.resident-theme .event-orange {
+    background: linear-gradient(120deg, rgba(251, 146, 60, 0.26), rgba(249, 115, 22, 0.18));
+    color: #fdfdfd;
+}
+
 @media (max-width: 360px) {
     .day-card { padding: 10px; margin: 10px; }
     .event-item { padding: 8px 10px; }
 }
 
-/* -------------------------------------- */
-/* 💬 Kommunikation / Chat-Layout         */
-/* -------------------------------------- */
+/*  Kommunikation / Chat-Layout         */
 
 .chat-container {
     padding: 12px;
-    padding-bottom: 140px; /* Platz für Input + Footer */
-    height: calc(100vh - 70px - 60px); /* Header + Footer + Input berücksichtigt */
+    padding-bottom: 140px;
+    height: calc(100vh - 70px - 60px);
     overflow: hidden;
 }
 
@@ -548,19 +617,16 @@ body.resident-theme footer .footer-link:hover {
     scroll-behavior: smooth;
 }
 
-/* einzelne Zeile: Avatar + Bubble */
 .message-row {
     display: flex;
     align-items: flex-end;
     gap: 10px;
 }
 
-/* eigene Nachrichten rechts anordnen */
 .message-row.own {
     flex-direction: row-reverse;
 }
 
-/* Avatar mit Initialen */
 .avatar {
     min-width: 44px;
     min-height: 44px;
@@ -575,7 +641,6 @@ body.resident-theme footer .footer-link:hover {
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
-/* Sprechblase */
 .message-bubble {
     max-width: 72%;
     background: #ffffff;
@@ -591,25 +656,22 @@ body.resident-theme footer .footer-link:hover {
     background: linear-gradient(90deg, #E6F3FF, #D6E4FF);
 }
 
-/* Nachrichtentext */
 .message-text {
     font-size: 15px;
     color: #0b2b19;
 }
 
-/* Zeit / Meta */
 .message-meta {
     font-size: 12px;
     color: #5b6b6b;
     align-self: flex-end;
 }
 
-/* Eingabebereich (fixiert oberhalb des Footers) */
 .chat-input-area {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 70px; /* oberhalb Footer */
+    bottom: 70px;
     display: flex;
     gap: 8px;
     padding: 10px 14px;
@@ -619,7 +681,6 @@ body.resident-theme footer .footer-link:hover {
     justify-content: center;
 }
 
-/* Input-Feld */
 .chat-input-area input[type="text"] {
     flex: 1;
     max-width: 860px;
@@ -631,7 +692,6 @@ body.resident-theme footer .footer-link:hover {
     box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
-/* Senden-Button */
 .send-btn {
     background: #27AE60;
     color: #fff;
@@ -645,7 +705,6 @@ body.resident-theme footer .footer-link:hover {
 
 .send-btn:active { transform: translateY(1px); }
 
-/* Responsive: auf sehr kleinen Bildschirmen verkleinern */
 @media (max-width: 420px) {
     .avatar { min-width: 38px; min-height: 38px; font-size: 13px; }
     .message-bubble { max-width: 78%; padding: 8px 10px; }
@@ -654,16 +713,69 @@ body.resident-theme footer .footer-link:hover {
     .send-btn { padding: 10px 12px; }
 }
 
-/* -------------------------------------- */
-/* 👤 Account / Profil                    */
-/* -------------------------------------- */
+body.resident-theme .chat-container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #0F1A2B;
+    padding: 18px 14px;
+    border-radius: 28px;
+    box-shadow: 0 26px 66px rgba(0, 0, 0, 0.45);
+}
+
+body.resident-theme .message-list {
+    padding: 10px 6px;
+}
+
+body.resident-theme .message-bubble {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    color: #fdfdfd;
+}
+
+body.resident-theme .message-row.own .message-bubble {
+    background: linear-gradient(130deg, rgba(56, 189, 248, 0.3), rgba(94, 234, 212, 0.3));
+}
+
+body.resident-theme .message-text {
+    color: #fdfdfd;
+}
+
+body.resident-theme .message-meta {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+body.resident-theme .avatar {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.28);
+}
+
+body.resident-theme .chat-input-area {
+    padding: 12px 14px;
+}
+
+body.resident-theme .chat-input-area input[type="text"] {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fdfdfd;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.28);
+}
+
+body.resident-theme .chat-input-area input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+body.resident-theme .send-btn {
+    background: linear-gradient(120deg, #22c55e, #16a34a);
+    box-shadow: 0 10px 22px rgba(34,197,94,0.28);
+}
+
+/* 👤 Account / Profil  */
 
 .account-container {
     padding: 14px;
-    padding-bottom: 110px; /* Platz für Footer */
+    padding-bottom: 110px;
 }
 
-/* Profilkarte: Avatar + Infos */
 .profile-card {
     display: flex;
     gap: 12px;
@@ -705,7 +817,6 @@ body.resident-theme footer .footer-link:hover {
     color: #6b7280;
 }
 
-/* Aktionsliste (links bzw. klickbare Reihen) */
 .account-actions {
     margin: 12px 14px;
     display: flex;
@@ -739,7 +850,6 @@ body.resident-theme footer .footer-link:hover {
     background: #FFECEC;
 }
 
-/* Kleinere Bildschirme: kompaktere Abstände */
 @media (max-width: 420px) {
     .profile-avatar { width: 64px; height: 64px; font-size: 18px; }
     .profile-card { padding: 12px; margin: 10px; }
@@ -747,9 +857,7 @@ body.resident-theme footer .footer-link:hover {
     .action-item { padding: 10px 12px; font-size: 15px; }
 }
 
-/* ----------------------------- */
 /* Patientenseite — Header & Boxen */
-/* ----------------------------- */
 
 #patient-page {
     position: relative;
@@ -759,7 +867,6 @@ body.resident-theme footer .footer-link:hover {
     background: transparent;
 }
 
-/* Rückpfeil links oben (innerhalb von #patient-page) */
 .back-button {
     position: absolute;
     top: 12px;
@@ -776,14 +883,11 @@ body.resident-theme footer .footer-link:hover {
     border-radius: 8px;
     transition: background 0.12s ease, transform 0.12s ease;
     z-index: 20;
-
-    /* Button-spezifisch: Reset / Accessibility */
     border: none;
     cursor: pointer;
     padding: 0;
 }
 
-/* Hover / Fokus */
 .back-button:hover {
     background: rgba(22,101,52,0.06);
     transform: translateY(-1px);
@@ -794,20 +898,18 @@ body.resident-theme footer .footer-link:hover {
     outline-offset: 2px;
 }
 
-/* Patient-Info (kein sichtbares Box-Design) */
 .patient-info-header {
     width: 100%;
-    background: transparent;    /* kein weißer Hintergrund mehr */
-    border-radius: 0;           /* keine abgerundete Box */
-    padding: 8px 6px;           /* leichter Abstand, kein Box-Padding */
+    background: transparent;
+    border-radius: 0;
+    padding: 8px 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
-    box-shadow: none;           /* sicherstellen, dass kein Schatten da ist */
+    box-shadow: none;
 }
 
-/* Avatar zentriert (gleiche Optik wie vorher) */
 .patient-avatar {
     width: 96px;
     height: 96px;
@@ -820,7 +922,6 @@ body.resident-theme footer .footer-link:hover {
     flex: 0 0 96px;
 }
 
-/* Details nebeneinander und zentriert */
 .patient-header-details {
     display: flex;
     flex-direction: column;
@@ -828,7 +929,6 @@ body.resident-theme footer .footer-link:hover {
     gap: 10px;
 }
 
-/* Eckdaten als inline-Row (nebeneinander) */
 .patient-quick-info {
     display: flex;
     gap: 18px;
@@ -837,7 +937,7 @@ body.resident-theme footer .footer-link:hover {
     flex-wrap: wrap;
     margin-top: 4px;
 }
-/* Dashboard-Boxen */
+
 .dashboard-containers {
     margin-top: 16px;
     display: grid;
@@ -845,14 +945,12 @@ body.resident-theme footer .footer-link:hover {
     gap: 14px;
 }
 
-/* größere Displays zwei Spalten */
 @media (min-width: 760px) {
     .dashboard-containers {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* einzelne Boxen als "Dashboard-Karten" */
 .dashboard-box {
     background: #ffffff;
     padding: 14px;
@@ -877,7 +975,6 @@ body.resident-theme footer .footer-link:hover {
     font-size: 14px;
 }
 
-/* Responsive: auf sehr kleinen Bildschirmen alles kompakt und vertikal */
 @media (max-width: 520px) {
     .patient-info-header {
         flex-direction: column;
@@ -932,7 +1029,6 @@ body.resident-theme footer .footer-link:hover {
     transform: translateY(-1px);
 }
 
-/* rundes Kästchen (checkbox-like) */
 .todo-checkbox {
     width: 22px;
     height: 22px;
@@ -947,7 +1043,6 @@ body.resident-theme footer .footer-link:hover {
     transition: background 0.12s ease, border-color 0.12s ease;
 }
 
-/* Häkchen / innerer Punkt (hidden by default) */
 .todo-checkbox .check {
     width: 12px;
     height: 12px;
@@ -957,29 +1052,25 @@ body.resident-theme footer .footer-link:hover {
     transform: scale(0.8);
 }
 
-/* === Todo: nur Checkbox grün, Text unverändert === */
 .todo-row.todo-done .todo-checkbox {
-    background: #27AE60; /* grünes Kästchen */
+    background: #27AE60;
     border-color: #27AE60;
 }
 
 .todo-row.todo-done .todo-checkbox .check {
-    background: #ffffff; /* innerer Punkt bleibt weiß */
+    background: #ffffff;
 }
 
-/* Beschreibungstext bleibt unverändert und sichtbar */
 .todo-row.todo-done .todo-title {
-    color: #263238;        /* gleiche Farbe wie normale Tasks */
-    text-decoration: none; /* kein Durchstreichen */
-    opacity: 1;            /* volle Sichtbarkeit */
+    color: #263238;
+    text-decoration: none;
+    opacity: 1;
 }
 
-/* optional: dezenter Zeilenhintergrund (entfernen, wenn nicht gewünscht) */
 .todo-row.todo-done {
     background: rgba(39,174,96,0.06);
 }
 
-/* kleine Bildschirme: kompakter */
 @media (max-width: 520px) {
     .todo-checkbox { width: 20px; height: 20px; min-width: 20px; }
     .todo-checkbox .check { width: 10px; height: 10px; }
@@ -995,21 +1086,18 @@ body.resident-theme footer .footer-link:hover {
     display: block;
 }
 
-/* Erledigt: grüner, dezenter Hintergrund */
 .todo-preview-list .todo-item.todo-done {
     background: linear-gradient(90deg, rgba(230,249,234,1), rgba(240,255,240,0.95));
     color: #166534;
     border-left: 4px solid #27AE60;
 }
 
-/* Noch offen / nicht erledigt: roter, dezenter Hintergrund */
 .todo-preview-list .todo-item.todo-pending {
     background: transparent;
     color: inherit;
     border-left: none;
 }
 
-/* optional: Hover leicht heben */
 .todo-preview-list .todo-item:hover {
     transform: translateY(-2px);
 }

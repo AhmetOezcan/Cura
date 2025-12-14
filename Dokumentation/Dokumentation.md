@@ -18,5 +18,11 @@ TO-Do Liste einfügen
 
 05.12 Patientenseite fertigstellen und desginen, mit backend verbinden
 
+9.12 Viel Deignen, Konzepte überleben
+
+10.12 Design Bewohner-Seite
+
+12.12 Design fertigstellen - erste Prototyp
+
 
 

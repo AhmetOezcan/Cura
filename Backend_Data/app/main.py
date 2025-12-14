@@ -73,6 +73,9 @@ class TodoUpdate(BaseModel):
     done: Optional[bool] = None
 
 
+
+
+
 # ---------------------------
 # Todo Update Route (PATCH)
 # ---------------------------
@@ -129,6 +132,20 @@ def get_patient(patient_id: int, db: Session = Depends(get_db)):
     if not patient:
         raise HTTPException(status_code=404, detail="Patient nicht gefunden")
     return patient
+
+
+@app.delete("/patients/{patient_id}", status_code=204)
+def delete_patient(patient_id: int, db: Session = Depends(get_db)):
+    """
+    Entfernt einen Patienten und zugehörige Todos.
+    """
+    patient = db.query(models.Patient).filter(models.Patient.id == patient_id).first()
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient nicht gefunden")
+
+    db.delete(patient)
+    db.commit()
+    return
 
 
 # Todo-Routen pro Patient

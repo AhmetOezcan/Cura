@@ -1,4 +1,4 @@
-// Basis-URL deines Backends
+// Basis-URL Backend
 const API_BASE_URL = "http://127.0.0.1:8000";
 
 // Container für die Patienten-Karten holen
@@ -13,7 +13,19 @@ function createPatientCard(patient) {
 
     // Name
     const name = document.createElement("h2");
-    name.textContent = patient.name;
+    const nameParts = (patient.name || "").trim().split(/\s+/);
+    const firstName = nameParts.shift() || "";
+    const lastName = nameParts.join(" ");
+    name.append(firstName);
+    if (lastName) {
+        name.appendChild(document.createElement("br"));
+        name.append(lastName);
+    }
+
+    // Zimmernummer
+    const room = document.createElement("p");
+    room.classList.add("patient-room");
+    room.textContent = patient.room_number ? `Zimmer ${patient.room_number}` : "Zimmer —";
 
     // Container für To-Do Vorschau
     const todoTitle = document.createElement("h3");
@@ -25,6 +37,7 @@ function createPatientCard(patient) {
 
     // Inhalte ins article packen
     article.appendChild(name);
+    article.appendChild(room);
     article.appendChild(todoTitle);
     article.appendChild(todoList);
 

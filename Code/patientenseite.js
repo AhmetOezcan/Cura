@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPatientDetails();
 });
 
+
 // Patient-Details laden
 async function loadPatientDetails() {
     const patientId = getPatientIdFromURL();
