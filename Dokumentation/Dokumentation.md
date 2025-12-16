@@ -24,7 +24,9 @@ TO-Do Liste einfügen
 
 12.12 Design fertigstellen - erste Prototyp
 
-14. - 16. Versuch anmelden
+14 - 16.12 Versuch anmelden gescheitert
+
+17.12 Debugging, fixiert
 
 
 

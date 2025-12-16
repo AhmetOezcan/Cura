@@ -69,6 +69,14 @@ class TodoUpdate(BaseModel):
     title: Optional[str] = None
     done: Optional[bool] = None
 
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+@app.post("/login")
+def login(data: LoginRequest):
+    return data.email
+
 
 
 
