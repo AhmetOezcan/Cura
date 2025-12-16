@@ -9,7 +9,7 @@ const patientList = document.getElementById("patient-list");
 function createPatientCard(patient) {
     const article = document.createElement("article");
     article.classList.add("patient-card");
-    article.dataset.patientId = patient.id; // später nutzbar für Detailseite
+    article.dataset.patientId = patient.id;
 
     // Name
     const name = document.createElement("h2");
