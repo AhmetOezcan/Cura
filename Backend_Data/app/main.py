@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Header
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,6 +7,14 @@ from .database import Base, engine, get_db
 from . import models
 from fastapi import HTTPException
 from typing import Optional
+
+import os
+import base64
+import hashlib
+import hmac
+
+from datetime import datetime, timedelta, timezone
+from jose import jwt, JWTError
 
 
 app = FastAPI()
@@ -24,6 +32,7 @@ app.add_middleware(
 # Datenbank-Tabellen erzeugen
 Base.metadata.create_all(bind=engine)
 
+#User
 
 
 # Patienten
@@ -73,11 +82,89 @@ class LoginRequest(BaseModel):
     email: str
     password: str
 
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+
+def hash_password(password: str) -> str:
+    salt = os.urandom(16)
+    pw_hash = hashlib.pbkdf2_hmac(
+        "sha256",
+        password.encode("utf-8"),
+        salt,
+        200_000
+    )
+    return "pbkdf2_sha256$200000$" + base64.b64encode(salt).decode() + "$" + base64.b64encode(pw_hash).decode()
+
+def verify_password(password: str, stored: str) -> bool:
+    algo, iterations, salt_b64, hash_b64 = stored.split("$")
+    if algo != "pbkdf2_sha256":
+        return False
+
+    salt = base64.b64decode(salt_b64)
+    expected = base64.b64decode(hash_b64)
+
+    test = hashlib.pbkdf2_hmac(
+        "sha256",
+        password.encode("utf-8"),
+        salt,
+        int(iterations)
+    )
+    return hmac.compare_digest(test, expected)
+
+SECRET_KEY = "CHANGE_ME_SUPER_SECRET"  # später in .env
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
+
+def create_access_token(subject: str) -> str:
+    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    payload = {"sub": subject, "exp": expire}
+    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+def get_current_user_email(authorization: str = Header(...)) -> str:
+    # Erwartet: "Bearer <token>"
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing Bearer token")
+
+    token = authorization.split(" ", 1)[1]
+
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email = payload.get("sub")
+        if not email:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        return email
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+
+
+
 @app.post("/login")
-def login(data: LoginRequest):
-    return data.email
+def login(data: LoginRequest, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.email == data.email).first()
+
+    if not user or not verify_password(data.password, user.password_hash):
+        raise HTTPException(status_code=401, detail="Ungültige Anmeldeinformationen")
+
+    token = create_access_token(subject=user.email)
+    return {"access_token": token, "token_type": "bearer"}
 
 
+
+@app.post("/register")
+def register(data: RegisterRequest, db: Session = Depends(get_db)):
+    pw = hash_password(data.password)
+    user = models.User(email=data.email, password_hash=pw)
+
+    db.add(user)
+    try:
+        db.commit()
+    except:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="E-Mail existiert bereits")
+
+    return {"message": "Registrierung erfolgreich"}
 
 
 

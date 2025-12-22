@@ -4,77 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
+
     <!-- Inter Schriftart -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="resident-theme">
+
+    <!-- Header -->
     <header class="topbar">
         <button class="icon-btn back-btn" aria-label="Zurück">&#8592;</button>
         <h1>EVENTS</h1>
-        <button class="icon-btn more-btn" aria-label="Optionen">&#8942;</button>
+        <button class="icon-btn more-btn" aria-label="Event hinzufügen">&#8942;</button>
     </header>
 
-    <main class="events-container">
-        <!-- Heute -->
-        <section class="day-card">
-            <div class="day-header">
-                <h2>Heute</h2>
-                <span class="day-date">17.11.2025</span>
-            </div>
-            <div class="event-list">
-                <div class="event-item event-blue">
-                    <strong>Frühstücksgruppe</strong>
-                    <span class="event-time">08:30</span>
-                </div>
-                <div class="event-item event-green">
-                    <strong>Physiotherapie</strong>
-                    <span class="event-time">10:00</span>
-                </div>
-                <div class="event-item event-yellow">
-                    <strong>Musiktherapie</strong>
-                    <span class="event-time">15:00</span>
-                </div>
-            </div>
-        </section>
+    <!-- Events (werden per JS erzeugt) -->
+    <main class="events-container" id="eventsContainer"></main>
 
-        <!-- Dienstag -->
-        <section class="day-card">
-            <div class="day-header">
-                <h2>Dienstag</h2>
-                <span class="day-date">18.11.2025</span>
-            </div>
-            <div class="event-list">
-                <div class="event-item event-purple">
-                    <strong>Leserunde</strong>
-                    <span class="event-time">11:00</span>
-                </div>
-                <div class="event-item event-orange">
-                    <strong>Sturzprävention</strong>
-                    <span class="event-time">14:00</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Mittwoch -->
-        <section class="day-card">
-            <div class="day-header">
-                <h2>Mittwoch</h2>
-                <span class="day-date">19.11.2025</span>
-            </div>
-            <div class="event-list">
-                <div class="event-item event-blue">
-                    <strong>Kaffee & Klatsch</strong>
-                    <span class="event-time">10:30</span>
-                </div>
-                <div class="event-item event-green">
-                    <strong>Therapeutisches Basteln</strong>
-                    <span class="event-time">13:00</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
+    <!-- Footer -->
     <footer>
         <a href="Events.html" class="footer-link footer-btn" aria-label="Veranstaltungen">
             <img src="icon/veranstaltung.png" alt="Veranstaltungen" class="footer-icon">
@@ -89,5 +38,47 @@
             <img src="icon/konto.png" alt="Account" class="footer-icon">
         </a>
     </footer>
+
+    <!-- Event Modal -->
+    <div class="modal-overlay" id="modalOverlay" hidden>
+        <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+            <header class="modal-header">
+                <h2 id="modalTitle">Neues Event</h2>
+                <button type="button" class="icon-btn" id="closeModalBtn" aria-label="Schließen">&#10005;</button>
+            </header>
+
+            <form id="eventForm" class="modal-form">
+                <label>
+                    Eventname
+                    <input
+                        type="text"
+                        id="eventName"
+                        required
+                        maxlength="50"
+                        placeholder="z.B. Physiotherapie">
+                </label>
+
+                <label>
+                    Datum
+                    <input type="date" id="eventDate" required>
+                </label>
+
+                <label>
+                    Uhrzeit
+                    <input type="time" id="eventTime" required>
+                </label>
+
+                <button type="submit" class="primary-btn">
+                    Hinzufügen
+                </button>
+            </form>
+
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="events.js"></script>
+
 </body>
 </html>

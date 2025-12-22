@@ -411,13 +411,17 @@ body.resident-theme footer .footer-link:hover {
     border: 0;
 }
 
-/* Events-Seite: Tageskarten   */
+/* =========================================================
+   Events-Seite: Tageskarten + Modal
+   ========================================================= */
 
+/* Events Container */
 .events-container {
     padding: 12px;
     padding-bottom: 110px;
 }
 
+/* Day Card (Default) */
 .day-card {
     background: white;
     margin: 12px 14px;
@@ -467,6 +471,7 @@ body.resident-theme footer .footer-link:hover {
     margin-left: 10px;
 }
 
+/* Event-Farben (Default) */
 .event-blue {
     background: linear-gradient(90deg, rgba(230,243,255,1), rgba(224,248,255,0.9));
     color: #0f4c81;
@@ -491,6 +496,10 @@ body.resident-theme footer .footer-link:hover {
     background: linear-gradient(90deg, rgba(255,243,230,1), rgba(255,248,240,0.95));
     color: #8a4b00;
 }
+
+/* =========================================================
+   Resident Theme
+   ========================================================= */
 
 body.resident-theme .events-container {
     max-width: 960px;
@@ -591,6 +600,145 @@ body.resident-theme .event-orange {
     background: linear-gradient(120deg, rgba(251, 146, 60, 0.26), rgba(249, 115, 22, 0.18));
     color: #fdfdfd;
 }
+
+/* =========================================================
+   Modal (Popup) – passt optisch zum Theme
+   ========================================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+}
+
+.modal {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 22px;
+    padding: 14px 14px 16px;
+
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 26px 66px rgba(0, 0, 0, 0.35);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.modal-header h2 {
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 0.2px;
+}
+
+/* Form */
+.modal-form {
+    display: grid;
+    gap: 12px;
+}
+
+.modal-form label {
+    display: grid;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.modal-form input {
+    border: 1px solid rgba(2, 6, 23, 0.14);
+    border-radius: 14px;
+    padding: 10px 12px;
+    font: inherit;
+    font-weight: 600;
+    outline: none;
+    background: #fff;
+    color: #0f172a;
+}
+
+.modal-form input:focus {
+    border-color: rgba(56, 189, 248, 0.9);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+}
+
+/* Button */
+.primary-btn {
+    border: 0;
+    border-radius: 14px;
+    padding: 11px 12px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+
+    background: #0F1A2B;
+    color: #f8fafc;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.primary-btn:active {
+    transform: translateY(1px);
+}
+
+/* Modal Close Button (nutzt deine .icon-btn Klasse, falls vorhanden) */
+.modal .icon-btn {
+    background: rgba(15, 23, 42, 0.08);
+    border: 0;
+    border-radius: 12px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal .icon-btn:active {
+    transform: translateY(1px);
+}
+
+/* =========================================================
+   Modal – Resident Theme Version (dunkler Look wie deine Cards)
+   ========================================================= */
+
+body.resident-theme .modal {
+    background: #0F1A2B;
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 26px 66px rgba(0, 0, 0, 0.55);
+}
+
+body.resident-theme .modal-form input {
+    background: rgba(15, 23, 42, 0.35);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+body.resident-theme .modal-form input:focus {
+    border-color: rgba(129, 140, 248, 0.95);
+    box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.18);
+}
+
+body.resident-theme .primary-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #f8fafc;
+}
+
+body.resident-theme .modal .icon-btn {
+    background: rgba(255, 255, 255, 0.10);
+    color: #f8fafc;
+}
+
 
 @media (max-width: 360px) {
     .day-card { padding: 10px; margin: 10px; }
@@ -1101,3 +1249,24 @@ body.resident-theme .send-btn {
 .todo-preview-list .todo-item:hover {
     transform: translateY(-2px);
 }
+
+/* FIX: Modal muss über allen fixed Elementen liegen */
+.modal-overlay { 
+    z-index: 5000 !important; 
+  }
+  
+  .modal { 
+    position: relative;
+    z-index: 5001 !important; 
+  }
+  
+  #closeModalBtn { 
+    position: relative; 
+    z-index: 5002 !important; 
+  }
+  
+
+  .modal-overlay[hidden] {
+    display: none !important;
+  }
+  

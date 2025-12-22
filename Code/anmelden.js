@@ -15,7 +15,16 @@ form.addEventListener("submit",
         body: JSON.stringify({email, password})
         });
 
-
     const data = await res.json();
-    console.log(data);
-});
+
+    if (!res.ok){
+        errorMsg.textContent = data.detail || "Anmeldeinformationen ungültig";
+        return;
+    }
+
+    localStorage.setItem("access_token", data.access_token);
+
+    window.location.href = "Bewohner.html";
+
+    });
+

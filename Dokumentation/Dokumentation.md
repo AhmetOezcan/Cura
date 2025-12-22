@@ -28,6 +28,10 @@ TO-Do Liste einfügen
 
 17.12 Debugging, fixiert
 
+--- Weihnachtspause -- 
+
+21.12 Events Seite Interaktiv machen
+
 
 
 
