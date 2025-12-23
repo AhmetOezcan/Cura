@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body.auth {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+  color: #0f172a;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(56,189,248,0.25), transparent 60%),
+    radial-gradient(900px 500px at 90% 20%, rgba(167,139,250,0.25), transparent 55%),
+    #0b1220;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.auth-shell {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 26px 70px rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #0b1220;
+  background: linear-gradient(140deg, #22d3ee, #a78bfa);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+}
+
+.brand-text h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+  color: #f8fafc;
+}
+
+.brand-text p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: rgba(248,250,252,0.75);
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(248,250,252,0.85);
+}
+
+input {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(15,23,42,0.35);
+  color: #f8fafc;
+  border-radius: 14px;
+  padding: 12px 12px;
+  font: inherit;
+  outline: none;
+}
+
+input::placeholder {
+  color: rgba(248,250,252,0.55);
+}
+
+input:focus {
+  border-color: rgba(34,211,238,0.85);
+  box-shadow: 0 0 0 4px rgba(34,211,238,0.18);
+}
+
+.error {
+  margin: 0;
+  min-height: 18px;
+  font-size: 13px;
+  color: #fecaca;
+}
+
+.btn {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #0b1220;
+  background: linear-gradient(140deg, #22d3ee, #a78bfa);
+  box-shadow: 0 16px 30px rgba(0,0,0,0.35);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.meta {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.link {
+  font-size: 13px;
+  color: rgba(248,250,252,0.85);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

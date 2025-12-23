@@ -1,8 +1,6 @@
 "use strict";
 
-/* =========================================================
-   DAY CARDS – echte Datumswerte
-   ========================================================= */
+//DAY CARDS – echte Datumswerte
 
 const eventsContainer = document.getElementById("eventsContainer");
 

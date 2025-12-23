@@ -32,6 +32,8 @@ TO-Do Liste einfügen
 
 21.12 Events Seite Interaktiv machen
 
+23.12 Anmeldeseite Designen + Logo erstellen
+
 
 
 
