@@ -136,3 +136,35 @@ input:focus {
 .link:hover {
   text-decoration: underline;
 }
+
+.auth-header {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .auth-logo {
+    width: min(320px, 92vw);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 18px 40px rgba(0,0,0,0.45));
+    border-radius: 18px;
+  }
+  
+  /* Textblock im Card-Header */
+  .brand-text-only h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 0.2px;
+    color: #f8fafc;
+  }
+  
+  .brand-text-only p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: rgba(248,250,252,0.75);
+  }
+  
