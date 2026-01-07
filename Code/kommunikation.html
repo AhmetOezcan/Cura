@@ -14,40 +14,35 @@
         <button class="icon-btn more-btn" aria-label="Optionen">&#8942;</button>
     </header>
 
-    <main class="chat-container">
-        <ul id="messageList" class="message-list" aria-live="polite">
-            <!-- Beispielnachrichten -->
-            <li class="message-row">
-                <div class="avatar" style="background:#FDE68A">AS</div>
-                <div class="message-bubble">
-                    <div class="message-text">Guten Morgen, heute um 10 Uhr ist die Physiotherapie.</div>
-                    <div class="message-meta">09:05</div>
-                </div>
-            </li>
-
-            <li class="message-row">
-                <div class="avatar" style="background:#C7F9D6">MB</div>
-                <div class="message-bubble">
-                    <div class="message-text">Danke — ich komme mit Frau Müller.</div>
-                    <div class="message-meta">09:09</div>
-                </div>
-            </li>
-
-            <li class="message-row own">
-                <div class="avatar" style="background:#D6E4FF">ME</div>
-                <div class="message-bubble">
-                    <div class="message-text">Alles klar, bis dann!</div>
-                    <div class="message-meta">09:12</div>
-                </div>
-            </li>
+    <section aria-label="Announcements Liste">
+        <ul id="announcement-list">
+          <!-- Beispiel-Item (nur Platzhalter) -->
+          <li>
+            <h2>Beispiel: Übergabe 14:00</h2>
+            <p>Heute bitte pünktlich zur Übergabe im Aufenthaltsraum.</p>
+            <small>von Admin • 07.01.2026</small>
+          </li>
         </ul>
-    </main>
+      </section>
+  
 
     <!-- Eingabebereich fix oberhalb des Footers -->
-    <div class="chat-input-area">
-        <input type="text" placeholder="Nachricht eingeben..." aria-label="Nachricht eingeben">
-        <button type="button" class="send-btn" aria-label="Senden">Senden</button>
-    </div>
+    <section aria-label="Neues Announcement erstellen">
+        <h2>Neues Announcement</h2>
+  
+        <form id="announcement-form">
+          <label for="title">Titel</label>
+          <input id="title" name="title" type="text" required maxlength="80" />
+  
+          <label for="message">Nachricht</label>
+          <textarea id="message" name="message" rows="4" required maxlength="500"></textarea>
+  
+          <button type="submit">Posten</button>
+        </form>
+  
+        <p id="form-msg" aria-live="polite"></p>
+      </section>
+
 
     <footer>
         <a href="Events.html" class="footer-link footer-btn" aria-label="Veranstaltungen">
@@ -63,5 +58,8 @@
             <img src="icon/konto.png" alt="Account" class="footer-icon">
         </a>
     </footer>
+
+    <script src="kommunikation.js"></script>
+    
 </body>
 </html>

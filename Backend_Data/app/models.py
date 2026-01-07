@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from .database import Base
+from datetime import datetime
 
 class Patient(Base):
     __tablename__ = "patients"
@@ -33,4 +34,13 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
+
+class Announcement(Base):
+    __tablename__ = "announcements"
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String(80), nullable=False)
+    message = Column(Text, nullable=False)
+    author = Column(String(50), nullable=False, default="Admin")
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 

@@ -28,11 +28,13 @@ TO-Do Liste einfügen
 
 17.12 Debugging, fixiert
 
---- Weihnachtspause -- 
 
 21.12 Events Seite Interaktiv machen
 
 23.12 Anmeldeseite Designen + Logo erstellen
+
+07.01 Kommunikation.html fertigstellen
+
 
 
 

@@ -86,6 +86,21 @@ class RegisterRequest(BaseModel):
     email: str
     password: str
 
+class AnnouncementCreate(BaseModel):
+    title: str
+    message: str
+    author: str | None = None
+
+class AnnouncementOut(BaseModel):
+    id: int
+    title: str
+    message: str
+    author: str
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
+
 def hash_password(password: str) -> str:
     salt = os.urandom(16)
     pw_hash = hashlib.pbkdf2_hmac(
@@ -261,4 +276,32 @@ def create_todo_for_patient(
 def get_todos_for_patient(patient_id: int, db: Session = Depends(get_db)):
     todos = db.query(models.Todo).filter(models.Todo.patient_id == patient_id).all()
     return todos
+
+@app.get("/announcements", response_model=list[AnnouncementOut])
+def list_announcements(db: Session = Depends(get_db)):
+    items = (
+        db.query(models.Announcement)
+        .order_by(models.Announcement.created_at.desc())
+        .all()
+    )
+    return items
+
+@app.post("/announcements", response_model=AnnouncementOut)
+def create_announcement(data: AnnouncementCreate, db: Session = Depends(get_db)):
+    title = data.title.strip()
+    message = data.message.strip()
+
+    if not title or not message:
+        raise HTTPException(status_code=400, detail="Titel und Nachricht sind Pflicht")
+
+    ann = models.Announcement(
+        title=title,
+        message=message,
+        author=(data.author.strip() if data.author else "Admin"),
+    )
+
+    db.add(ann)
+    db.commit()
+    db.refresh(ann)
+    return ann
 

@@ -1270,3 +1270,168 @@ body.resident-theme .send-btn {
     display: none !important;
   }
   
+  /* ---------- Kommunikation / Announcements ---------- */
+
+.resident-theme {
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #0b0f19;
+    color: #e9edf5;
+    margin: 0;
+    min-height: 100vh;
+  }
+  
+  /* Topbar (falls du sie schon hast, nur angleichen) */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: #0b0f19;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .topbar h1 {
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.12em;
+    font-size: 14px;
+    font-weight: 700;
+    color: #f3f6ff;
+  }
+  
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f3f6ff;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .icon-btn:active {
+    transform: translateY(1px);
+  }
+  
+  /* Layout: Platz für Footer lassen */
+  body.resident-theme {
+    padding-bottom: 78px; /* Footer-Höhe */
+  }
+  
+  /* Sections */
+  body.resident-theme > section {
+    padding: 14px;
+  }
+  
+  /* Announcements Liste */
+  #announcement-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  
+  #announcement-list li {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 12px 12px;
+  }
+  
+  #announcement-list h2 {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #f3f6ff;
+  }
+  
+  #announcement-list p {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(233, 237, 245, 0.88);
+  }
+  
+  #announcement-list small {
+    display: block;
+    font-size: 12px;
+    color: rgba(233, 237, 245, 0.65);
+  }
+  
+  /* Form Card */
+  section[aria-label="Neues Announcement erstellen"] {
+    padding-top: 4px;
+  }
+  
+  section[aria-label="Neues Announcement erstellen"] h2 {
+    margin: 6px 0 10px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(233, 237, 245, 0.9);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  
+  #announcement-form {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 12px;
+    display: grid;
+    gap: 10px;
+  }
+  
+  #announcement-form label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(233, 237, 245, 0.78);
+  }
+  
+  #announcement-form input,
+  #announcement-form textarea {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(0, 0, 0, 0.22);
+    color: #f3f6ff;
+    padding: 10px 12px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  #announcement-form textarea {
+    resize: vertical;
+    min-height: 92px;
+  }
+  
+  #announcement-form input:focus,
+  #announcement-form textarea:focus {
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+  
+  #announcement-form button {
+    border: 0;
+    border-radius: 12px;
+    padding: 11px 12px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    background: #4f7cff;
+    color: #0b0f19;
+  }
+  
+  #announcement-form button:active {
+    transform: translateY(1px);
+  }
+  
+  #form-msg {
+    margin: 10px 2px 0 2px;
+    font-size: 13px;
+    color: rgba(233, 237, 245, 0.8);
+  }
