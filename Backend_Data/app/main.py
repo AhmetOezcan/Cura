@@ -12,6 +12,7 @@ import os
 import base64
 import hashlib
 import hmac
+import json
 
 from datetime import datetime, timedelta, timezone
 from jose import jwt, JWTError
@@ -152,8 +153,41 @@ def get_current_user_email(authorization: str = Header(...)) -> str:
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
+class MedicationDayAssign(BaseModel):
+    day: str        # MO, DI, MI, DO, FR, SA, SO
+    medication: str
 
+@app.post("/patients/{patient_id}/medication/day", response_model=PatientOut)
+def assign_medication_day(patient_id: int, data: MedicationDayAssign, db: Session = Depends(get_db)):
+    patient = db.query(models.Patient).filter(models.Patient.id == patient_id).first()
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient nicht gefunden")
 
+    # Bestehende Medication-Daten als JSON laden (falls vorhanden), sonst neues Mapping anlegen
+    meds_map = {}
+    try:
+        if patient.medication and patient.medication.strip():
+            meds_map = json.loads(patient.medication)
+            if not isinstance(meds_map, dict):
+                meds_map = {}
+    except Exception:
+        meds_map = {}
+
+    day = data.day.strip().upper()
+    valid_days = {"MO","DI","MI","DO","FR","SA","SO"}
+    if day not in valid_days:
+        raise HTTPException(status_code=400, detail="Ungültiger Wochentag. Verwende MO, DI, MI, DO, FR, SA, SO")
+
+    # Medikation an den Tag anfügen (Liste), du kannst hier stattdessen ersetzen wenn gewünscht
+    day_list = meds_map.get(day, [])
+    day_list.append(data.medication.strip())
+    meds_map[day] = day_list
+
+    patient.medication = json.dumps(meds_map, ensure_ascii=False)
+    db.add(patient)
+    db.commit()
+    db.refresh(patient)
+    return patient
 
 @app.post("/login")
 def login(data: LoginRequest, db: Session = Depends(get_db)):

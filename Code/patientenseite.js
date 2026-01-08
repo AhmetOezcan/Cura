@@ -58,7 +58,6 @@ function displayPatientDetails(patient) {
     const ageEl = document.getElementById("patient-age");
     const roomEl = document.getElementById("patient-room");
     const diagEl = document.getElementById("patient-diagnosis");
-    const medEl = document.getElementById("medication-text");
     const notesEl = document.getElementById("notes-text");
     const avatarEl = document.getElementById("avatar-img");
 
@@ -66,14 +65,129 @@ function displayPatientDetails(patient) {
     if (ageEl) ageEl.textContent = patient.age ?? "-";
     if (roomEl) roomEl.textContent = patient.room_number ?? "-";
     if (diagEl) diagEl.textContent = patient.diagnosis ?? "-";
-    if (medEl) medEl.textContent = patient.medication ?? "—";
     if (notesEl) notesEl.textContent = patient.notes ?? "—";
+    
+    // Medikamenten-Organizer befüllen
+    displayMedicationOrganizer(patient.medication ?? "");
     
     // Avatar (Placeholder-Service) — Name URL-encodiert
     if (avatarEl) {
         avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(patient.name)}&background=27AE60&color=fff`;
     }
 }
+
+// Helfer: versucht JSON-Map aus medication-String zu parsen
+function parseMedicationMap(text) {
+    try {
+        const obj = JSON.parse(text);
+        if (obj && typeof obj === "object") return obj;
+    } catch (e) {}
+    return null;
+}
+
+// Medikamenten-Wochenorganizer anzeigen und Klick zum Eintragen (POST /medication/day)
+function displayMedicationOrganizer(medicationText) {
+    const organizer = document.getElementById("medication-organizer");
+    if (!organizer) return;
+
+    organizer.innerHTML = "";
+
+    const days = [
+        { label: "MO", day: "Montag" },
+        { label: "DI", day: "Dienstag" },
+        { label: "MI", day: "Mittwoch" },
+        { label: "DO", day: "Donnerstag" },
+        { label: "FR", day: "Freitag" },
+        { label: "SA", day: "Samstag" },
+        { label: "SO", day: "Sonntag" }
+    ];
+
+    const medsMap = parseMedicationMap(medicationText);
+
+    days.forEach(dayObj => {
+        const dayDiv = document.createElement("div");
+        dayDiv.className = "medication-day";
+        dayDiv.setAttribute("role", "button");
+        dayDiv.tabIndex = 0;
+
+        const label = document.createElement("div");
+        label.className = "medication-day-label";
+        label.textContent = dayObj.label;
+
+        const content = document.createElement("div");
+        content.className = "medication-day-content";
+
+        if (medsMap && Array.isArray(medsMap[dayObj.label]) && medsMap[dayObj.label].length > 0) {
+            medsMap[dayObj.label].forEach(m => {
+                const item = document.createElement("span");
+                item.className = "medication-day-item";
+                item.textContent = m;
+                content.appendChild(item);
+            });
+            dayDiv.classList.add("has-medication");
+        } else if (!medsMap && medicationText && medicationText.trim()) {
+            // Fallback: unstrukturierter String — anzeigen
+            const item = document.createElement("span");
+            item.className = "medication-day-item";
+            item.textContent = medicationText;
+            content.appendChild(item);
+            dayDiv.classList.add("has-medication");
+        } else {
+            content.textContent = "—";
+            content.classList.add("medication-day-empty");
+        }
+
+        // Klick: Prompt + POST an /patients/{id}/medication/day
+        dayDiv.addEventListener("click", async () => {
+            const med = window.prompt(`Medikament für ${dayObj.label} eintragen:`);
+            if (!med || !med.trim()) return;
+
+            const patientId = getPatientIdFromURL();
+            if (!patientId) {
+                alert("Keine Patient-ID gefunden.");
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/patients/${patientId}/medication/day`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ day: dayObj.label, medication: med.trim() })
+                });
+
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(res.status + " " + text);
+                }
+
+                // UI-Update: neuen Eintrag anhängen (optimistisch)
+                const empty = content.querySelector(".medication-day-empty");
+                if (empty) content.innerHTML = "";
+                const item = document.createElement("span");
+                item.className = "medication-day-item";
+                item.textContent = med.trim();
+                content.appendChild(item);
+                dayDiv.classList.add("has-medication");
+            } catch (err) {
+                console.error("Fehler beim Speichern der Medikation:", err);
+                alert("Speichern fehlgeschlagen: " + (err.message || ""));
+            }
+        });
+
+        // Enter/Space für Tastatur unterstützen
+        dayDiv.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                dayDiv.click();
+            }
+        });
+
+        dayDiv.appendChild(label);
+        dayDiv.appendChild(content);
+        organizer.appendChild(dayDiv);
+    });
+}
+
 
 // Todos für Patient laden (interaktiv, optimistisches Update + Persistenz)
 async function loadPatientTodos(patientId) {
@@ -137,7 +251,6 @@ async function loadPatientTodos(patientId) {
                     if (!res.ok) {
                         throw new Error("Speichern fehlgeschlagen");
                     }
-                    // Optional: const updated = await res.json();
                 } catch (err) {
                     console.error("Fehler beim Speichern des Todo-Status:", err);
                     // Rollback bei Fehler
