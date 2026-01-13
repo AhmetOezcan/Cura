@@ -38,7 +38,17 @@
                 </ul>
             </div>
 
-                        <!-- Medikamente (7-Tage Organizer) -->
+        <section class="dashboard-card">
+            <h2 id="blutdruck_ue">🫀 Blutdruck</h2>
+            <p class="today-value">Heute: <strong>135 / 85 mmHg</strong></p>
+
+            <canvas id="bloodPressureChart" height="140"></canvas>
+
+            <p class="last-update">Letzte Messung: 08:10</p>
+        </section>
+
+
+            <!-- Medikamente (7-Tage Organizer) -->
             <div class="dashboard-box" id="medication-box">
                 <h3>Medikamente</h3>
                 <div id="medication-organizer" class="medication-organizer">
@@ -55,6 +65,9 @@
             </div>
         </section>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <script src="patientenseite.js"></script>
 </body>

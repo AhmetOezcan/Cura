@@ -270,3 +270,40 @@ async function loadPatientTodos(patientId) {
         if (todosList) todosList.innerHTML = "<li>Fehler beim Laden der To-Dos</li>";
     }
 }
+
+//Blutdruck
+
+const ctx = document.getElementById('bloodPressureChart');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+    datasets: [
+      {
+        label: 'Systolisch',
+        data: [140, 138, 142, 135, 135, 130, 132],
+        borderWidth: 2,
+        tension: 0.3
+      },
+      {
+        label: 'Diastolisch',
+        data: [90, 88, 92, 85, 85, 82, 84],
+        borderWidth: 2,
+        tension: 0.3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false } // ruhig & clean
+    },
+    scales: {
+      y: {
+        min: 70,
+        max: 160
+      }
+    }
+  }
+});
