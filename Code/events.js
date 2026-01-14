@@ -64,7 +64,33 @@ function renderNextDays(count = 7) {
   }
 }
 
+// Platzhalter-Events hinzufügen
+function addPlaceholderEvents() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const placeholders = [
+    { offset: 0, title: "Physiotherapie", time: "10:00" },
+    { offset: 0, title: "Mittagessen", time: "12:30" },
+    { offset: 1, title: "Musiktherapie", time: "14:00" },
+    { offset: 2, title: "Lesestunde", time: "15:00" },
+    { offset: 3, title: "Physiotherapie", time: "09:30" },
+    { offset: 3, title: "Sturzvorbeugungs-Training", time: "16:00" },
+    { offset: 4, title: "Musiktherapie", time: "11:00" },
+    { offset: 5, title: "Lesestunde", time: "10:30" },
+    { offset: 5, title: "Mittagessen", time: "12:30" },
+  ];
+
+  placeholders.forEach(event => {
+    const eventDate = new Date(today);
+    eventDate.setDate(today.getDate() + event.offset);
+    const dateISO = toISODate(eventDate);
+    addEventToDay(dateISO, event.title, event.time);
+  });
+}
+
 renderNextDays();
+addPlaceholderEvents();
 
 /* =========================================================
    MODAL
