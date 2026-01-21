@@ -239,7 +239,7 @@ def update_todo(todo_id: int, todo: TodoUpdate, db: Session = Depends(get_db)):
 # Test-Route
 @app.get("/")
 def read_root():
-    return {"message": "Cura Backend läuft 🚑"}
+    return {"message": "Cura Backend läuft"}
 
 
 # Patienten-Routen

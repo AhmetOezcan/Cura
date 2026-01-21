@@ -28,7 +28,6 @@ TO-Do Liste einfügen
 
 17.12 Debugging, fixiert
 
-
 21.12 Events Seite Interaktiv machen
 
 23.12 Anmeldeseite Designen + Logo erstellen
@@ -38,6 +37,14 @@ TO-Do Liste einfügen
 08.01 Medikamenten-Box
 
 13.01 Grafik Blutdruck + Kommunikation update
+
+14.01 Interview mit Direktorin Pflegeheim
+
+Care Center
+dokumentierenm, Planungen, medikamenten, tablettversion, KI
+
+Sensoren, Sturzmatten, Türklingen, Cps Uhren, Cps Tracker
+
 
 
 
